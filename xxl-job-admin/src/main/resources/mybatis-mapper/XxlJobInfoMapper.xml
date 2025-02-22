@@ -218,7 +218,6 @@
 		FROM xxl_job_info
 	</select>
 
-
 	<select id="scheduleJobQuery" parameterType="java.util.HashMap" resultMap="XxlJobInfo">
 		SELECT <include refid="Base_Column_List" />
 		FROM xxl_job_info AS t
@@ -229,15 +228,15 @@
 	</select>
 
 	<update id="scheduleUpdate" parameterType="com.xxl.job.admin.core.model.XxlJobInfo"  >
-		UPDATE xxl_job_info
-		SET
-			trigger_last_time = #{triggerLastTime},
-			trigger_next_time = #{triggerNextTime}
-			<if test="triggerStatus gte 0">
-			 , trigger_status = #{triggerStatus}
-			</if>
-		WHERE id = #{id}
-		  AND trigger_status = 1
-	</update>
+        UPDATE xxl_job_info
+        SET
+        trigger_last_time = #{triggerLastTime},
+        trigger_next_time = #{triggerNextTime}
+        <if test="triggerStatus gte 0">
+            , trigger_status = #{triggerStatus}
+        </if>
+        WHERE id = #{id}
+        AND trigger_status = 1
+    </update>
 
 </mapper>
