@@ -26,7 +26,7 @@ jobs:
         run: echo ${{ secrets.GITHUB_TOKEN }}
 
       - name: Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v1
         with:
           files: xxl-job-admin/target/xxl-job-admin-*.jar
         env:
