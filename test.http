@@ -1,0 +1,12 @@
+# @name
+POST http://127.0.0.1:8080/xxl-job-admin/api/jobPage HTTP/1.1
+XXL-JOB-ACCESS-TOKEN: default_token
+Content-Type: application/json
+
+{
+  "triggerStatus": -1,
+  "pageNumber": 1,
+  "pageSize": 10
+}
+
+###

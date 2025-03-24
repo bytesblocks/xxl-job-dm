@@ -1,5 +1,6 @@
 package com.xxl.job.admin.dao;
 
+import com.xxl.job.admin.api.vo.LogPageItemVO;
 import com.xxl.job.admin.core.model.XxlJobLog;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -59,4 +60,7 @@ public interface XxlJobLogDao {
 
 	public List<Long> findLostJobIds(@Param("losedTime") Date losedTime);
 
+	List<LogPageItemVO> pageLog(@Param("jobName") String jobName, @Param("triggerTimeStart") String triggerTimeStart, @Param("triggerTimeEnd") String triggerTimeEnd, @Param("pageNumber") int pageNumber, @Param("pageSize") int pageSize);
+
+	long pageLogCount(@Param("jobName") String jobName, @Param("triggerTimeStart") String triggerTimeStart, @Param("triggerTimeEnd") String triggerTimeEnd, @Param("pageNumber") int pageNumber, @Param("pageSize") int pageSize);
 }

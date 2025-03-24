@@ -34,4 +34,5 @@ public interface XxlJobGroupDao {
                              @Param("appname") String appname,
                              @Param("title") String title);
 
+    XxlJobGroup getByAppName(@Param("appName") String appName);
 }

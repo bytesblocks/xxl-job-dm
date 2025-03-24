@@ -1,10 +1,12 @@
 package com.xxl.job.admin.controller.interceptor;
 
 import com.xxl.job.admin.controller.annotation.PermissionLimit;
+import com.xxl.job.admin.core.conf.XxlJobAdminConfig;
 import com.xxl.job.admin.core.model.XxlJobGroup;
 import com.xxl.job.admin.core.model.XxlJobUser;
 import com.xxl.job.admin.core.util.I18nUtil;
 import com.xxl.job.admin.service.impl.LoginService;
+import com.xxl.job.core.util.XxlJobRemotingUtil;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.AsyncHandlerInterceptor;
@@ -42,6 +44,10 @@ public class PermissionInterceptor implements AsyncHandlerInterceptor {
 		if (permission!=null) {
 			needLogin = permission.limit();
 			needAdminuser = permission.adminuser();
+		}
+
+		if(XxlJobAdminConfig.getAdminConfig().getAccessToken().equals(request.getHeader(XxlJobRemotingUtil.XXL_JOB_ACCESS_TOKEN))){
+			return true;
 		}
 
 		if (needLogin) {

@@ -91,4 +91,10 @@
             </if>
         </trim>
     </select>
+
+    <select id="getByAppName" resultMap="XxlJobGroup">
+        SELECT *
+        FROM xxl_job_group
+        WHERE app_name = #{appName}
+    </select>
 </mapper>

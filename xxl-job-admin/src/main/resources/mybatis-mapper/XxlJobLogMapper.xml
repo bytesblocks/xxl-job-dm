@@ -254,6 +254,64 @@
           AND t.trigger_time <![CDATA[ <= ]]> #{losedTime}
           AND t2.id IS NULL;
     </select>
+
+    <select id="pageLog" resultType="com.xxl.job.admin.api.vo.LogPageItemVO">
+        select l.id,
+        t.id as job_id,
+        t.job_desc as job_name,
+        l.trigger_time,
+        l.trigger_code,
+        l.trigger_msg,
+        l.handle_time,
+        l.handle_code,
+        l.handle_msg
+        from (select *
+        from xxl_job_info
+        where author = 'ETL') as t
+        left join xxl_job_log l on t.id = l.job_id
+        <where>
+            <if test="jobName != null and jobName != ''">
+                and t.job_desc like CONCAT(CONCAT('%', #{jobName}), '%')
+            </if>
+            <if test="triggerTimeStart != null and triggerTimeStart != ''">
+                and l.trigger_time <![CDATA[ >= ]]> #{triggerTimeStart}
+            </if>
+            <if test="triggerTimeEnd != null and triggerTimeEnd != ''">
+                and l.trigger_time <![CDATA[ <= ]]> #{triggerTimeEnd}
+            </if>
+        </where>
+        order by l.trigger_time desc
+    </select>
+
+    <select id="pageLogCount" resultType="long">
+        select count(1) from (
+        select l.id,
+        t.id as job_id,
+        t.job_desc as job_name,
+        l.trigger_time,
+        l.trigger_code,
+        l.trigger_msg,
+        l.handle_time,
+        l.handle_code,
+        l.handle_msg
+        from (select *
+        from xxl_job_info
+        where author = 'ETL') as t
+        left join xxl_job_log l on t.id = l.job_id
+        <where>
+            <if test="jobName != null and jobName != ''">
+                and t.job_desc like CONCAT(CONCAT('%', #{jobName}), '%')
+            </if>
+            <if test="triggerTimeStart != null and triggerTimeStart != ''">
+                and l.trigger_time <![CDATA[ >= ]]> #{triggerTimeStart}
+            </if>
+            <if test="triggerTimeEnd != null and triggerTimeEnd != ''">
+                and l.trigger_time <![CDATA[ <= ]]> #{triggerTimeEnd}
+            </if>
+        </where>
+        order by l.trigger_time desc
+        ) as tmp
+    </select>
     <!--
     SELECT t.id
     FROM xxl_job_log AS t
