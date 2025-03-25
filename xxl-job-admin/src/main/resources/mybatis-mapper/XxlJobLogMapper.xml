@@ -257,14 +257,14 @@
 
     <select id="pageLog" resultType="com.xxl.job.admin.api.vo.LogPageItemVO">
         select l.id,
-        t.id as job_id,
-        t.job_desc as job_name,
-        l.trigger_time,
-        l.trigger_code,
-        l.trigger_msg,
-        l.handle_time,
-        l.handle_code,
-        l.handle_msg
+        t.id as jobId,
+        t.job_desc as jobName,
+        l.trigger_time as triggerTime,
+        l.trigger_code as triggerCode,
+        l.trigger_msg as triggerMsg,
+        l.handle_time as handleTime,
+        l.handle_code as handleCode,
+        l.handle_msg as handleMsg
         from (select *
         from xxl_job_info
         where author = 'ETL') as t
@@ -286,14 +286,14 @@
     <select id="pageLogCount" resultType="long">
         select count(1) from (
         select l.id,
-        t.id as job_id,
-        t.job_desc as job_name,
-        l.trigger_time,
-        l.trigger_code,
-        l.trigger_msg,
-        l.handle_time,
-        l.handle_code,
-        l.handle_msg
+        t.id as jobId,
+        t.job_desc as jobName,
+        l.trigger_time as triggerTime,
+        l.trigger_code as triggerCode,
+        l.trigger_msg as triggerMsg,
+        l.handle_time as handleTime,
+        l.handle_code as handleCode ,
+        l.handle_msg as handleMsg
         from (select *
         from xxl_job_info
         where author = 'ETL') as t

@@ -139,10 +139,13 @@ public class ApiServiceImpl implements ApiService {
   public ReturnT<String> pageLog(final LogPageDTO logParam) {
     final int pageNumber = logParam.getPageNumber();
     final int pageSize = logParam.getPageSize();
-    List<LogPageItemVO> list = this.xxlJobLogDao.pageLog(logParam.getJobName(), logParam.getTriggerTimeStart(), logParam
-        .getTriggerTimeEnd(), (pageNumber - 1) * pageSize, pageSize);
-    long total = this.xxlJobLogDao.pageLogCount(logParam.getJobName(), logParam.getTriggerTimeStart(), logParam
-        .getTriggerTimeEnd(), (pageNumber - 1) * pageSize, pageSize);
+    final String jobName = logParam.getJobName();
+    final String triggerTimeStart = logParam.getTriggerTimeStart();
+    final String triggerTimeEnd = logParam.getTriggerTimeEnd();
+    List<LogPageItemVO> list = this.xxlJobLogDao.pageLog(jobName, triggerTimeStart, triggerTimeEnd, (pageNumber - 1)
+        * pageSize, pageSize);
+    long total = this.xxlJobLogDao.pageLogCount(jobName, triggerTimeStart, triggerTimeEnd, (pageNumber - 1) * pageSize,
+        pageSize);
     IPage<LogPageItemVO> page = new IPage<>();
     page.setTotal(total);
     page.setCurrent(pageNumber);
